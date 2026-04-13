@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Use a modern Material 3 parent theme -->
+    <style name="Theme.A212029_AlyaDamia_DrNazatul_Lab3" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Optional: Ensure the window background is definitely white in light mode -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>
