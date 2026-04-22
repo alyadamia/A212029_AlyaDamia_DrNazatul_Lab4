@@ -4,15 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.a212029_alyadamia_drnazatul_lab3"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    namespace = "com.example.a212029_alyadamia_drnazatul_lab4"
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.a212029_alyadamia_drnazatul_lab3"
+        applicationId = "com.example.a212029_alyadamia_drnazatul_lab4"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -42,6 +38,8 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
@@ -50,6 +48,8 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

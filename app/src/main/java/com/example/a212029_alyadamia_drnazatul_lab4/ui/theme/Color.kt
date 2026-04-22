@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab3.ui.theme
+package com.example.a212029_alyadamia_drnazatul_lab4.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF715289)
@@ -216,10 +216,3 @@ val surfaceContainerLowDarkHighContrast = Color(0xFF221E24)
 val surfaceContainerDarkHighContrast = Color(0xFF332F35)
 val surfaceContainerHighDarkHighContrast = Color(0xFF3E3A40)
 val surfaceContainerHighestDarkHighContrast = Color(0xFF4A454B)
-
-
-
-
-
-
-

@@ -1,13 +1,13 @@
-package com.example.a212029_alyadamia_drnazatul_lab3.ui.theme
+package com.example.a212029_alyadamia_drnazatul_lab4.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import com.example.a212029_alyadamia_drnazatul_lab3.R
+import com.example.a212029_alyadamia_drnazatul_lab4.R
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.a212029_alyadamia_drnazatul_lab3.ui.theme.Typography
+import com.example.a212029_alyadamia_drnazatul_lab4.ui.theme.Typography
 
 val AbrilFatface = FontFamily(
     Font(R.font.abril_fatface_regular)

@@ -1,128 +1,56 @@
-package com.example.a212029_alyadamia_drnazatul_lab3
+package com.example.a212029_alyadamia_drnazatul_lab4
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.a212029_alyadamia_drnazatul_lab3.ui.theme.AppTheme
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            // This will automatically apply the colors you generate from the Material Theme Builder
-            AppTheme (
-                dynamicColor = false
-                ) {
-                MainScreen()
-            }
-        }
-    }
-}
-
-@Composable
-fun MainScreen() {
-    var isFinished by remember { mutableStateOf(false) }
-    val focusManager = LocalFocusManager.current
-
-    Scaffold(
-        bottomBar = { BottomNavigationBar() }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.bg_app),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.FillBounds,
-                alpha = 0.4f
-            )
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null
-                    ) { focusManager.clearFocus() }
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
-            ) {
-
-                TopHeader()
-                Spacer(modifier = Modifier.height(20.dp))
-
-                // Hanya panggil sekali sahaja di sini
-                MainInfo()
-                Spacer(modifier = Modifier.height(20.dp))
-
-                ButtonBox(onButtonClick = {
-                    isFinished = true
-                    focusManager.clearFocus()
-                })
-
-                if (isFinished) {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Text(
-                        text = "Congratulations, you have finished updating your period day for this month.",
-                        color = Color(0xFF4CAF50), // Keeping standard green for success message
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(30.dp))
-
-                AverageSection()
-                Spacer(modifier = Modifier.height(30.dp))
-
-                FeelingCard()
-                Spacer(modifier = Modifier.height(50.dp))
-            }
-        }
-    }
-}
 
 @Composable
 fun TopHeader() {
@@ -137,7 +65,7 @@ fun TopHeader() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                // GANTIKAN 'logo_app' DENGAN NAMA FAIL GAMBAR LOGO ANDA
+
                 painter = painterResource(id = R.drawable.period_logo),
                 contentDescription = "App Logo",
                 modifier = Modifier
@@ -152,7 +80,7 @@ fun TopHeader() {
             )
         }
 
-        // BAHAGIAN KANAN: Butang Notification (Kekal seperti asal)
+        // BAHAGIAN KANAN: Butang Notification
         Box(
             modifier = Modifier
                 .size(40.dp)
@@ -197,8 +125,7 @@ fun ButtonBox(onButtonClick: () -> Unit) {
         Text(text = "Period Ends", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
     }
 }
-
-// TASK 2 & 3: Wrapped in a Material Card AND added an expansion animation
+//task expand
 @Composable
 fun AverageCard(title: String, value: String, icon: Int, description: String) {
     var expanded by remember { mutableStateOf(false) }
@@ -350,18 +277,52 @@ fun FeelingCard() {
 }
 
 @Composable
-fun BottomNavigationBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(70.dp)
-            .background(MaterialTheme.colorScheme.surface),
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically
+fun BottomNavigationBar(
+    onAddClick: () -> Unit = {},
+    onCalendarClick: () -> Unit = {}
+) {
+    // Gunakan Surface supaya elevation dan warna background lebih konsisten
+    Surface(
+        color = MaterialTheme.colorScheme.surface,
+        tonalElevation = 8.dp, // Tambah sedikit bayang supaya nampak terapung
+        modifier = Modifier.fillMaxWidth()
     ) {
-        NavItem("Home", Icons.Default.Home)
-        NavItem("Calendar", Icons.Default.DateRange)
-        NavItem("Settings", Icons.Default.Settings)
+        Row(
+            modifier = Modifier
+                .navigationBarsPadding() // Ini akan menambah padding di peranti sebenar
+                .padding(vertical = 5.dp) // Tambah padding atas/bawah supaya tak rapat sangat
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Left Side: Home
+            NavItem("Home", Icons.Default.Home)
+
+            // Center Side: The '+' Action Button
+            // Gunakan FloatingActionButton atau kekalkan Box dengan saiz tetap
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .clip(RoundedCornerShape(50)) // Bulat sempurna
+                    .background(MaterialTheme.colorScheme.primary)
+                    .clickable { onAddClick() },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "+",
+                    fontSize = 32.sp,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.offset(y = (-2).dp) // Kadangkala '+' nampak rendah sikit, kita offset sikit ke atas
+                )
+            }
+
+            // Right Side: Calendar
+            Box(modifier = Modifier.clickable { onCalendarClick() }) {
+                NavItem("Calendar", Icons.Default.DateRange)
+            }
+        }
     }
 }
 
@@ -370,27 +331,5 @@ fun NavItem(label: String, icon: ImageVector) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Icon(imageVector = icon, contentDescription = label, tint = MaterialTheme.colorScheme.primary)
         Text(text = label, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurface)
-    }
-}
-
-// Preview untuk Light Mode
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewLight() {
-    AppTheme(dynamicColor = false) {
-        MainScreen()
-    }
-}
-
-// Preview untuk Dark Mode
-@Preview(
-    showBackground = true,
-    showSystemUi = true,
-    uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES // Paksa preview jadi gelap
-)
-@Composable
-fun PreviewDark() {
-    AppTheme(dynamicColor = false) {
-        MainScreen()
     }
 }
