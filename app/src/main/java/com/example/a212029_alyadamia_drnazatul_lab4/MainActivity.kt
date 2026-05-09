@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {
+fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {//tarikh yng disimpan boleh dibaca oleh skrin yng lain
 
     val navController = rememberNavController()
 

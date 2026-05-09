@@ -55,7 +55,7 @@ fun AddPeriodScreen(
                                 SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(Date(it))
                             } ?: "Not selected"
                             selectedDate = date
-                            viewModel.updatePeriodDates(start = date, end = "")
+                            viewModel.updatePeriodDates(start = date, end = "")//panggil viewmodel
                             showDatePicker = false
                         }) { Text("OK") }
                     }
