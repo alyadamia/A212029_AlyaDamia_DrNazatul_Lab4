@@ -1,12 +1,10 @@
-package com.example.a212029_alyadamia_drnazatul_lab4
+package com.example.a212029_alyadamia_drnazatul_Project1
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
@@ -18,15 +16,24 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.interaction.MutableInteractionSource
 
 @Composable
-fun PeriodScreen(
+fun MainScreen(
     onAddClick: () -> Unit,
-    onCalendarClick: () -> Unit
+    onCalendarClick: () -> Unit,
+    onSymptomsClick: () -> Unit,
+    onInsightsClick: () -> Unit,
+    viewModel: PeriodViewModel,
+
 ) {
     var isFinished by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
 
     Scaffold(
-        bottomBar = { BottomNavigationBar(onAddClick = onAddClick, onCalendarClick = onCalendarClick) }
+        bottomBar = { 
+            BottomNavigationBar(
+                onAddClick = onAddClick, 
+                onCalendarClick = onCalendarClick
+            ) 
+        }
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
@@ -47,13 +54,14 @@ fun PeriodScreen(
                     ) { focusManager.clearFocus() }
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState())
+
             ) {
-                TopHeader()
+                TopHeader(onInsightsClick = onInsightsClick)
                 Spacer(modifier = Modifier.height(20.dp))
                 MainInfo()
                 Spacer(modifier = Modifier.height(20.dp))
                 ButtonBox(onButtonClick = {
-                    isFinished = true
+                    isFinished = !isFinished // Toggle: buka kalau tutup, tutup kalau buka
                     focusManager.clearFocus()
                 })
 
@@ -69,9 +77,9 @@ fun PeriodScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(30.dp))
-                AverageSection()
+                AverageSection(onSymptomsClick = onSymptomsClick)
                 Spacer(modifier = Modifier.height(30.dp))
-                FeelingCard()
+                FeelingCard(viewModel = viewModel)
                 Spacer(modifier = Modifier.height(50.dp))
             }
         }

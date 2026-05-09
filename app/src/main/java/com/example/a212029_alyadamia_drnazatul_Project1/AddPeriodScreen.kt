@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab4
+package com.example.a212029_alyadamia_drnazatul_Project1
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -55,7 +55,7 @@ fun AddPeriodScreen(
                                 SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(Date(it))
                             } ?: "Not selected"
                             selectedDate = date
-                            viewModel.updatePeriodDates(start = date, end = "")
+                            viewModel.updatePeriodDates(start = date, end = "")//panggil viewmodel
                             showDatePicker = false
                         }) { Text("OK") }
                     }

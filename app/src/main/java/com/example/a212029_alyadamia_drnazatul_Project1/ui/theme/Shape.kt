@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab4.ui.theme
+package com.example.a212029_alyadamia_drnazatul_Project1.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

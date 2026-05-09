@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab4.ui.theme
+package com.example.a212029_alyadamia_drnazatul_Project1.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF715289)

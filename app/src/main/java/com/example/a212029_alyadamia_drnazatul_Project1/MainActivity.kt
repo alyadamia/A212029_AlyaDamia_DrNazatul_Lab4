@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab4
+package com.example.a212029_alyadamia_drnazatul_Project1
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,13 +10,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.a212029_alyadamia_drnazatul_lab4.ui.theme.AppTheme
+import com.example.a212029_alyadamia_drnazatul_Project1.ui.theme.AppTheme
 
 
 enum class Screen {
     Home,
     AddPeriod,
-    Calendar
+    Calendar,
+    Symptoms,
+    Insight
 }
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +34,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {
+fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {//tarikh yng disimpan boleh dibaca oleh skrin yng lain
 
     val navController = rememberNavController()
 
@@ -42,9 +44,12 @@ fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {
     ) {
         // Skrin 1: Home (MainScreen)
         composable(route = Screen.Home.name) {
-            PeriodScreen(
+            MainScreen(
                 onAddClick = { navController.navigate(Screen.AddPeriod.name) },
-                onCalendarClick = { navController.navigate(Screen.Calendar.name) }
+                onCalendarClick = { navController.navigate(Screen.Calendar.name) },
+                onSymptomsClick = { navController.navigate(Screen.Symptoms.name) },
+                onInsightsClick = { navController.navigate(Screen.Insight.name) },
+                viewModel = viewModel
             )
         }
 
@@ -63,6 +68,22 @@ fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {
                 viewModel = viewModel
             )
         }
+
+        //Skrin 4 : Symptoms
+        composable(route = Screen.Symptoms.name) {
+            SymptomsScreen(
+                onBack = { navController.popBackStack() },
+                viewModel = viewModel
+            )
+        }
+
+        //Skrin 5 : Insights
+        composable(route = Screen.Insight.name) {
+            InsightsScreen(
+                onBack = { navController.popBackStack() },
+                viewModel = viewModel
+            )
+        }
     }
 }
 
@@ -73,7 +94,12 @@ fun PeriodApp(viewModel: PeriodViewModel = viewModel()) {
 @Composable
 fun PreviewLight() {
     AppTheme(dynamicColor = false) {
-        PeriodScreen(onAddClick = {}, onCalendarClick = {})
+        MainScreen(
+            onAddClick = {},
+            onCalendarClick = {},
+            onSymptomsClick = {},
+            onInsightsClick = {},
+            viewModel = viewModel())
     }
 }
 
@@ -86,6 +112,11 @@ fun PreviewLight() {
 @Composable
 fun PreviewDark() {
     AppTheme(dynamicColor = false) {
-        PeriodScreen(onAddClick = {}, onCalendarClick = {})
+        MainScreen(
+            onAddClick = {},
+            onCalendarClick = {},
+            onSymptomsClick = {},
+            onInsightsClick = {},
+            viewModel = viewModel())
     }
 }

@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab4
+package com.example.a212029_alyadamia_drnazatul_Project1
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -6,39 +6,14 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,51 +26,47 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.a212029_alyadamia_drnazatul_Project1.R
 
 @Composable
-fun TopHeader() {
+fun TopHeader(onInsightsClick: () -> Unit) { 
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween, // Tolak item ke kiri dan kanan
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-
-        // BAHAGIAN KIRI: Logo + Teks "Today"
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
-
                 painter = painterResource(id = R.drawable.period_logo),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(32.dp)
-                    .padding(end = 8.dp) // Jarak sikit antara logo dan perkataan "Today"
+                contentDescription = null,
+                modifier = Modifier.size(32.dp).padding(end = 8.dp)
             )
             Text(
-                text = "Today",
-                fontSize = 20.sp,
+                text = "Today", 
+                fontSize = 20.sp, 
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground
             )
         }
 
-        // BAHAGIAN KANAN: Butang Notification
         Box(
             modifier = Modifier
                 .size(40.dp)
                 .clip(RoundedCornerShape(50))
-                .background(MaterialTheme.colorScheme.primaryContainer),
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .clickable { onInsightsClick() },
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = Icons.Default.Notifications,
-                contentDescription = "Notification",
-                tint = MaterialTheme.colorScheme.primary
+                imageVector = Icons.Default.Info,
+                contentDescription = "Insights",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(24.dp)
             )
         }
     }
 }
+
 @Composable
 fun MainInfo() {
     Column(
@@ -104,12 +75,12 @@ fun MainInfo() {
     ) {
         Text(text = "Period", fontSize = 16.sp, color = MaterialTheme.colorScheme.onBackground)
         Text(
-            text = "21 DAYS LEFT",
+            text = "5 DAYS LEFT",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary // Upgraded to Material Theme
+            color = MaterialTheme.colorScheme.primary 
         )
-        Text(text = "Apr 20 - Next Period", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
+        Text(text = "May 14 - Next Period", fontSize = 14.sp, color = MaterialTheme.colorScheme.onBackground)
     }
 }
 
@@ -125,7 +96,7 @@ fun ButtonBox(onButtonClick: () -> Unit) {
         Text(text = "Period Ends", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
     }
 }
-//task expand
+
 @Composable
 fun AverageCard(title: String, value: String, icon: Int, description: String) {
     var expanded by remember { mutableStateOf(false) }
@@ -133,8 +104,8 @@ fun AverageCard(title: String, value: String, icon: Int, description: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { expanded = !expanded } // Toggle expansion
-            .animateContentSize( // Smooth animation when expanding
+            .clickable { expanded = !expanded } 
+            .animateContentSize(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioMediumBouncy,
                     stiffness = Spring.StiffnessLow
@@ -163,7 +134,6 @@ fun AverageCard(title: String, value: String, icon: Int, description: String) {
                 )
             }
 
-            // Expanded content
             if (expanded) {
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
@@ -177,7 +147,7 @@ fun AverageCard(title: String, value: String, icon: Int, description: String) {
 }
 
 @Composable
-fun AverageSection() {
+fun AverageSection(onSymptomsClick: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -194,14 +164,21 @@ fun AverageSection() {
             icon = R.drawable.ic_cycle,
             description = "A standard cycle ranges from 21 to 35 days."
         )
+        Button(
+            onClick = onSymptomsClick,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+        ) {
+            Text("Add Daily Symptoms")
+        }
     }
 }
 
-// TASK 2: Upgraded from a Box/Column to a Material Card
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun FeelingCard() {
+fun FeelingCard(viewModel: PeriodViewModel) {
     var moodInput by remember { mutableStateOf("") }
-    var displayText by remember { mutableStateOf("") }
+    val uiState by viewModel.uiState.collectAsState()
     val focusManager = LocalFocusManager.current
 
     Card(
@@ -238,7 +215,8 @@ fun FeelingCard() {
                 keyboardActions = KeyboardActions(
                     onDone = {
                         if (moodInput.isNotEmpty()) {
-                            displayText = "My Feeling Today: $moodInput"
+                            viewModel.addFeeling(moodInput)
+                            moodInput = ""
                             focusManager.clearFocus()
                         }
                     }
@@ -250,7 +228,8 @@ fun FeelingCard() {
             Button(
                 onClick = {
                     if (moodInput.isNotEmpty()) {
-                        displayText = "My Feeling Today: $moodInput"
+                        viewModel.addFeeling(moodInput)
+                        moodInput = ""
                         focusManager.clearFocus()
                     }
                 },
@@ -259,18 +238,34 @@ fun FeelingCard() {
                     .height(45.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text(text = "Save Feeling", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
+                Text(text = "Add Feeling", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
             }
 
-            if (displayText.isNotEmpty()) {
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = displayText,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
+            if (uiState.feelings.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = "My Feelings Today:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    uiState.feelings.forEach { feeling ->
+                        InputChip(
+                            selected = true,
+                            onClick = { viewModel.removeFeeling(feeling) },
+                            label = { Text(feeling) },
+                            trailingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = "Remove",
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        )
+                    }
+                }
             }
         }
     }
@@ -278,32 +273,31 @@ fun FeelingCard() {
 
 @Composable
 fun BottomNavigationBar(
+    onHomeClick: () -> Unit = {},
     onAddClick: () -> Unit = {},
     onCalendarClick: () -> Unit = {}
 ) {
-    // Gunakan Surface supaya elevation dan warna background lebih konsisten
     Surface(
         color = MaterialTheme.colorScheme.surface,
-        tonalElevation = 8.dp, // Tambah sedikit bayang supaya nampak terapung
+        tonalElevation = 8.dp,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier
-                .navigationBarsPadding() // Ini akan menambah padding di peranti sebenar
-                .padding(vertical = 5.dp) // Tambah padding atas/bawah supaya tak rapat sangat
+                .navigationBarsPadding()
+                .padding(vertical = 5.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Left Side: Home
-            NavItem("Home", Icons.Default.Home)
+            Box(modifier = Modifier.clickable { onHomeClick() }) {
+                NavItem("Home", Icons.Default.Home)
+            }
 
-            // Center Side: The '+' Action Button
-            // Gunakan FloatingActionButton atau kekalkan Box dengan saiz tetap
             Box(
                 modifier = Modifier
                     .size(50.dp)
-                    .clip(RoundedCornerShape(50)) // Bulat sempurna
+                    .clip(RoundedCornerShape(50))
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable { onAddClick() },
                 contentAlignment = Alignment.Center
@@ -314,11 +308,10 @@ fun BottomNavigationBar(
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontWeight = FontWeight.Normal,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.offset(y = (-2).dp) // Kadangkala '+' nampak rendah sikit, kita offset sikit ke atas
+                    modifier = Modifier.offset(y = (-2).dp)
                 )
             }
 
-            // Right Side: Calendar
             Box(modifier = Modifier.clickable { onCalendarClick() }) {
                 NavItem("Calendar", Icons.Default.DateRange)
             }
