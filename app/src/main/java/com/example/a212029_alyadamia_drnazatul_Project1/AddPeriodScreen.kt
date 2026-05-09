@@ -1,4 +1,4 @@
-package com.example.a212029_alyadamia_drnazatul_lab4
+package com.example.a212029_alyadamia_drnazatul_Project1
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
